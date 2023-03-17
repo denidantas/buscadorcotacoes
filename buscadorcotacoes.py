@@ -22,11 +22,11 @@ import pandas as pd
 
 dados = input("Informe o endereço da tabela Excel que deseja atualizar valores: ")
 tabela = pd.read_excel(dados)
+pd.set_option('Display.max_columns', None)
 print(tabela)
 coluna = input("informe nome da coluna dos valores da moeda a ser alterada: ")
 
 if tabela.loc[(coluna)] == "Dólar" and tabela.loc[(coluna)] == "Cotação":
-    tabela["Cotação"] = cotacao
-    tabela["Preço de Compra"] = tabela["Cotação"] * tabela["Preço Original"]
+   tabela["Cotação"] = cotacao
+   tabela["Preço de Compra"] = tabela["Cotação"] * tabela["Preço Original"]
 
-print(tabela)
