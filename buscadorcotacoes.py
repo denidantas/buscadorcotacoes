@@ -16,8 +16,6 @@ def pegar_cotacoes(cot):
     if cot ==3:
        return requisicao_dic["BTCBRL"]["bid"]
 
-
-
 cotacao = pegar_cotacoes(cot)
 import pandas as pd
 
