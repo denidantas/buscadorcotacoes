@@ -8,16 +8,16 @@ def pegar_cotacoes(cot):
     requisicao_dic = requisicao.json()
 
     if cot == 1:
-       cotacao_dolar = requisicao_dic["USDBRL"]["bid"]
-       print(cotacao_dolar)
-    if cot==2:
-       cotacao_euro = requisicao_dic["EURBRL"]["bid"]
-       print(cotacao_euro)
-    if cot ==3:
-       cotacao_btc = requisicao_dic["BTCBRL"]["bid"]
-       print(cotacao_btc)
+       return requisicao_dic["USDBRL"]["bid"]
 
-pegar_cotacoes(cot)
+    if cot==2:
+       return requisicao_dic["EURBRL"]["bid"]
+
+    if cot ==3:
+       return requisicao_dic["BTCBRL"]["bid"]
+
+
+
 cotacao = pegar_cotacoes(cot)
 import pandas as pd
 
