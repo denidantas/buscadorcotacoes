@@ -1,4 +1,5 @@
 import requests
+#teste
 
 cot = dolar = euro = btc= 0
 cot = int(input("Informe: 1 - Cotação Dólar   2 - Cotação Euro   3 - cotação BitCoins: "))
