@@ -3,7 +3,7 @@ import requests
 # teste 2
 
 cot = dolar = euro = btc = 0
-moeda = ""
+mod = ""
 cot = int(input("Informe: 1 - Cotação Dólar   2 - Cotação Euro   3 - cotação BitC: "))
 
 
@@ -12,15 +12,15 @@ def pegar_cotacoes(cot):
     requisicao_dic = requisicao.json()
 
     if cot == 1:
-        moeda = "Dólar"
+        mod = "Dólar"
         return requisicao_dic["USDBRL"]["bid"]
 
     if cot == 2:
-        moeda2 = "Euro"
+        mod = "Euro"
         return requisicao_dic["EURBRL"]["bid"]
 
     if cot == 3:
-        moeda = "BitC"
+        mod = "BitC"
         return requisicao_dic["BTCBRL"]["bid"]
 
 
