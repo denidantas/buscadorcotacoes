@@ -1,21 +1,20 @@
 import requests
+from PySimpleGUI import Window, Input, Button, Checkbox, Text
 
-cot = dolar = euro = btc = 0
 
-cot = int(input("Informe: 1 - Cotação Dólar   2 - Cotação Euro   3 - cotação BitC: "))
-
-lass TelaPython:
+class telapython:
     def __init__(self):
         layout = [
-            [sg.Checkbox('Dolar', key='Dolar'), sg.Checkbox('Euro', key='Euro'), sg.Checkbox('BitCoins', key='BTC')],
-            [sg.Text('Endereco do Arquivo', size=(20, 0)), sg.Input(size=(20, 0), key='Endereco do Arquivo')],
-            [sg.Text('Local de descricao da moeda', size=(30, 0)), sg.Input(size=(10, 0), key='loc desc moeda')],
-            [sg.Text('Local da Cotacao', size=(30, 0)), sg.Input(size=(15, 0), key='cotacao')],
-            [sg.Text('Local em Reais', size=(35, 0)), sg.Input(size=(15, 0), key='reais')],
-            [sg.Text('Loc Moeda Original', size=(35, 0)), sg.Input(size=(15, 0), key='original')],
-            [sg.Button('Confirmar Dados')]
+            [Checkbox('Dolar', key='Dolar'), Checkbox('Euro', key='Euro'), Checkbox('BitCoins', key='BTC')],
+            [Text('Endereco do Arquivo', size=(20, 0)), Input(size=(20, 0), key='Endereco do Arquivo')],
+            [Text('Local de descricao da moeda', size=(30, 0)), Input(size=(10, 0), key='loc desc moeda')],
+            [Text('Local da Cotacao', size=(30, 0)), Input(size=(15, 0), key='cotacao')],
+            [Text('Local em Reais', size=(35, 0)), Input(size=(15, 0), key='reais')],
+            [Text('Loc Moeda Original', size=(35, 0)), Input(size=(15, 0), key='original')],
+            [Button('Confirmar Dados')]
         ]
-        self.janela = sg.Window("Atualizador de Cotações").layout(layout)
+        self.janela = Window("Atualizador de Cotações").layout(layout)
+
     def Iniciar(self):
         while True:
             self.button, self.values = self.janela.read()
@@ -35,26 +34,29 @@ lass TelaPython:
             print(f'Informe coluna dos valores da cotação: {loc_cot}')
             print(f'Informe coluna do valor de compras em R$: {loc_val_reais}')
             print(f'Informe a coluna do valor de compra original: {loc_val_original}')
-tela = TelaPython()
+    
+    def pegar_cotacoes(cot):
+        requisicao = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
+        requisicao_dic = requisicao.json()
+
+        if cot == 1:
+            mo_e_da = "Dólar"
+            return requisicao_dic["USDBRL"]["bid"]
+
+        if cot == 2:
+            mo_e_da = "Euro"
+            return requisicao_dic["EURBRL"]["bid"]
+
+        if cot == 3:
+            mo_e_da = "BitC"
+            return requisicao_dic["BTCBRL"]["bid"]
+
+
+tela = telapython()
 tela.Iniciar()
-def pegar_cotacoes(cot):
-    requisicao = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
-    requisicao_dic = requisicao.json()
-
-    if cot == 1:
-        mo_e_da = "Dólar"
-        return requisicao_dic["USDBRL"]["bid"]
-
-    if cot == 2:
-        mo_e_da = "Euro"
-        return requisicao_dic["EURBRL"]["bid"]
-
-    if cot == 3:
-        mo_e_da = "BitC"
-        return requisicao_dic["BTCBRL"]["bid"]
-
 
 cotacao = pegar_cotacoes(cot)
+
 
 import pandas as pd
 
