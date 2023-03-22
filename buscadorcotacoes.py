@@ -78,16 +78,9 @@ class telapython:
             pd.set_option('Display.max_columns', None)
             print(tabela)
 
-            # tabela.loc[tabela[(coluna)] == "Dólar","Cotação"] = float(cotacao)
-            # tabela["Preço Base Reais"] = tabela["Cotação"] * tabela["Preço Base Original"]
-            # tabela["Preço Final"] = tabela["Preço Base Reais"] * tabela["Ajuste"]
-
             tabela.loc[tabela[desc_moeda] == mo_e_da, loc_cot] = float(cotacao)
             tabela[loc_val_reais] = tabela[loc_cot] * tabela[loc_val_original]
             print(tabela)
 
-
 tela = telapython()
 tela.Iniciar()
-
-
