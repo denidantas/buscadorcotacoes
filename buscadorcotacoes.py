@@ -1,6 +1,7 @@
 import requests
 from PySimpleGUI import Window, Input, Button, Checkbox, Text
 
+
 class TelaPython:
     def Iniciar(self, self1):
         pass
@@ -23,15 +24,17 @@ class telapython:
         requisicao = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
         requisicao_dic = requisicao.json()
 
-        if cot == 1:
+        global mo_e_da
+
+        if cot == 1:            
             mo_e_da = "Dólar"
             return requisicao_dic["USDBRL"]["bid"]
 
-        if cot == 2:
+        if cot == 2:            
             mo_e_da = "Euro"
             return requisicao_dic["EURBRL"]["bid"]
 
-        if cot == 3:
+        if cot == 3:           
             mo_e_da = "BitC"
             return requisicao_dic["BTCBRL"]["bid"]
 
@@ -69,20 +72,22 @@ class telapython:
             print(f'Informe coluna do valor de compras em R$: {loc_val_reais}')
             print(f'Informe a coluna do valor de compra original: {loc_val_original}')  
 
+            import pandas as pd
+
+            tabela = pd.read_excel(dados)
+            pd.set_option('Display.max_columns', None)
+            print(tabela)
+
+            # tabela.loc[tabela[(coluna)] == "Dólar","Cotação"] = float(cotacao)
+            # tabela["Preço Base Reais"] = tabela["Cotação"] * tabela["Preço Base Original"]
+            # tabela["Preço Final"] = tabela["Preço Base Reais"] * tabela["Ajuste"]
+
+            tabela.loc[tabela[desc_moeda] == mo_e_da, loc_cot] = float(cotacao)
+            tabela[loc_val_reais] = tabela[loc_cot] * tabela[loc_val_original]
+            print(tabela)
+
 
 tela = telapython()
 tela.Iniciar()
 
-import pandas as pd
 
-tabela = pd.read_excel(dados)
-pd.set_option('Display.max_columns', None)
-print(tabela)
-
-# tabela.loc[tabela[(coluna)] == "Dólar","Cotação"] = float(cotacao)
-# tabela["Preço Base Reais"] = tabela["Cotação"] * tabela["Preço Base Original"]
-# tabela["Preço Final"] = tabela["Preço Base Reais"] * tabela["Ajuste"]
-
-tabela.loc[tabela[desc_moeda] == mo_e_da, loc_cot] = float(cotacao)
-tabela[loc_val_reais] = tabela[loc_cot] * tabela[loc_val_original]
-print(tabela)
