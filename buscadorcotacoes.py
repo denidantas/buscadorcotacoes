@@ -82,5 +82,7 @@ class telapython:
             tabela[loc_val_reais] = tabela[loc_cot] * tabela[loc_val_original]
             print(tabela)
 
+
+
 tela = telapython()
 tela.Iniciar()
