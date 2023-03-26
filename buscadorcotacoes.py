@@ -1,6 +1,7 @@
 import requests
 from PySimpleGUI import Window, Input, Button, Checkbox, Text
 
+mo_e_da=''
 
 class TelaPython:
     def Iniciar(self, self1):
